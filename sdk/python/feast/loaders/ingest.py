@@ -6,7 +6,7 @@ import numpy as np
 from itertools import repeat
 from multiprocessing import Process, Queue, Pool
 import pandas as pd
-from confluent_kafka import Producer
+import confluent_kafka
 
 from tqdm import tqdm
 from feast.type_map import convert_df_to_feature_rows
@@ -48,7 +48,7 @@ def _encode_chunk(df: pd.DataFrame, feature_set: FeatureSet):
 def ingest_kafka(
     feature_set: FeatureSet,
     dataframe: pd.DataFrame,
-    producer: Producer,
+    producer: confluent_kafka.Producer,
     max_workers: int,
     chunk_size: int = 5000,
     disable_progress_bar: bool = False,
